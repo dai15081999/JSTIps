@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Query | Search String</h1>
+      <!-- https://developer.mozilla.org/en-US/docs/Web/API/Location/search -->
+    </header>
+    <main>
+      <p>
+        <a href="http://localhost:5500/index.html">local without querystring</a>
+      </p>
+      <p>
+        <a href="/index.html?one=Bree&two=Teja&three=Rakeem"
+          >local WITH querystring</a
+        >
+      </p>
+      <p><input id="search" value="" /><button id="btnSearch">Load</button></p>
+      <script>
+        const log = console.log;
+
+        window.addEventListener("load", () => {
+          log(location.href); //everything
+          log(location.pathname); //just folders and file
+          if(location.search) {
+            log(location.search)
+            let qs = decodeURIComponent(location.search.substring(1))
+            let params = new Map()
+            let parts = qs.split('&')
+            log(parts)
+            parts.forEach(part => {
+                let key = part.split('=')[0]
+                let val = part.split('=')[1]
+                params.set(key, val)
+            })
+            log(params)
+          }
+          let btn = document.getElementById('btnSearch');
+          btn.addEventListener('click', (ev) => {
+            let url = location.pathname;
+            let str = document.getElementById('search').value.trim();
+            url = `${url}?${encodeURIComponent(str)}`;
+            location.href = url;
+          });
+        });
+
+        /*
+          let m = new Map();
+          m.has(key)
+          m.delete(key)
+          m.set(key, val)
+          m.get(key, val)
+          m.keys() list of keys in map
+          m.values() list of values in map
+          m.entries() list of arrays [key, val]
+          m.forEach() loop like through an array
+          m.size length of Map
+          */
+      </script>
+    </main>
+  </body>
+</html>

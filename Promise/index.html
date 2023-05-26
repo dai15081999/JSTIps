@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let p1 = new Promise((resolve, reject) => {
+        resolve(1);
+      });
+      let p2 = new Promise((resolve, reject) => {
+        setTimeout(resolve, 100, 2);
+      });
+      let p3 = new Promise((resolve, reject) => {
+        reject(3);
+      });
+      let p4 = new Promise((resolve, reject) => {
+        setTimeout(reject, 100, 4);
+      });
+
+      Promise.race([p1, p2, p3, p4])
+        .then((resp) => {
+          console.log("FIRST of four responses", { resp });
+        })
+        .catch((err) => {
+          console.error(`CATCH ERROR ${err}`);
+        });
+
+      Promise.all([p1, p2, p3, p4])
+        .then(([r1, r2, r3, r4]) => {
+          console.log("ALL FOUR responses... if all were good");
+        })
+        .catch((err) => {
+          console.error(`CATCH ERROR ${err}`);
+        });
+
+      Promise.allSettled([p1, p2, p3, p4])
+        .then((responses) => {
+          console.log("finished with ALL FOUR");
+          responses.forEach((resp, index) => {
+            console.log(index, { resp });
+          });
+        })
+        .catch((err) => {
+          console.error(`CATCH ERROR ${err}`);
+        });
+      Promise.any([p1, p2, p3, p4])
+        .then((resp) => {
+          console.log("At least one worked", { resp });
+          //resp is the first one that resolved
+        })
+        .catch((err) => {
+          //if all promises are rejected
+          console.error(`CATCH ERROR ${err}`);
+        });
+    </script>
+  </body>
+</html>

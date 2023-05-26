@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS AbortController</title>
+    <style>
+      html {
+        font-size: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        line-height: 1.5;
+      }
+      p:first-child {
+        color: orangered;
+      }
+      button {
+        font-size: 1rem;
+        color: white;
+        background-color: cornflowerblue;
+        border: none;
+        padding: 0.2rem 2rem;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>AbortController</h1>
+      <h2>Cancelling a Fetch</h2>
+    </header>
+    <main>
+      <p>
+        Safari was the last major browser to support the AbortController in
+        March 2019 with version 12.1.
+      </p>
+      <p>
+        So we can consider it well supported with about 91% Global coverage.
+      </p>
+      <p>
+        <a href="https://caniuse.com/abortcontroller" target="_blank"
+          >Can I Use Reference</a
+        >
+      </p>
+      <p>
+        The AbortController Object has a <code>signal</code> property for
+        binding to other processes and an <code>abort()</code> method that let's
+        us abort <code>fetch()</code> calls and some DOM methods.
+      </p>
+      <p>
+        <button id="btnStart">Start the Fetch</button>
+      </p>
+    </main>
+    <script>
+      const url = `https://jsonplaceholder.typicode.com/posts`;
+      //create AbortControllers
+      const fetchController = new AbortController();
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('btnStart').addEventListener('click', getData);
+      });
+
+      function getData() {
+        const { signal } = fetchController;
+        let timmy = setTimeout(() => {
+          fetchController.abort();
+          console.log('abort');
+        }, 3000);
+
+        fetch(url, { signal })
+          .then((resp) => resp.json())
+          .then((data) => {
+            console.log('we got the data back from JSONPlaceholder');
+          })
+          .catch((err) => {
+            console.warn({ err });
+          });
+      }
+    </script>
+  </body>
+</html>
