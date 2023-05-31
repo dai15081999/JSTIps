@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Autocomplete</title>
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Forms</h1>
+      <h2>AutoComplete Attributes</h2>
+    </header>
+    <main>
+      <p>
+        Reference:
+        https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
+      </p>
+      <form
+        name="sampleForm"
+        action="index.html"
+        method="GET"
+        autocomplete="on"
+      >
+        <legend>Register</legend>
+        <p>
+          <label for="fullname">Full Name</label>
+          <input
+            type="text"
+            id="fullname"
+            name="fullname"
+            inputmode="text"
+            enterkeyhint="next"
+            autocomplete="name"
+            required
+          />
+          <span class="instructions"><span class="errMessage"></span></span>
+        </p>
+        <p>
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            inputmode="email"
+            enterkeyhint="next"
+            autocomplete="email"
+            required
+          />
+          <span class="instructions"><span class="errMessage"></span></span>
+        </p>
+        <p>
+          <label for="pass">Password</label>
+          <input
+            type="password"
+            id="pass"
+            name="pass"
+            inputmode="text"
+            enterkeyhint="next"
+            autocomplete="new-password"
+            required
+          />
+          <span class="instructions"><span class="errMessage"></span> </span>
+        </p>
+        <p>
+          <label for="lang">Language</label>
+          <select id="lang" name="lang" autocomplete="off">
+            <option value="en" lang="en">English</option>
+            <option value="sv" lang="sv">Svensk</option>
+            <option value="ru" lang="ru" selected>Русский</option>
+            <option value="de" lang="de">Deutsch</option>
+            <option value="es" lang="es">Español</option>
+            <option value="fr" lang="fr">Français</option>
+          </select>
+          <span class="instructions"><span class="errMessage"></span></span>
+        </p>
+        <p>
+          <label for="address">Address</label>
+          <textarea
+            id="address"
+            name="address"
+            inputmode="text"
+            autocomplete="street-address"
+            required
+          ></textarea>
+          <span class="instructions"><span class="errMessage"></span></span>
+        </p>
+        <fieldset>
+          <p>
+            <label for="ccname">Name on Card</label>
+            <input
+              type="text"
+              id="ccname"
+              name="ccname"
+              inputmode="numeric"
+              enterkeyhint="next"
+              autocomplete="cc-name"
+              required
+            />
+            <span class="instructions"><span class="errMessage"></span></span>
+          </p>
+          <p>
+            <label for="cctype">Card Type</label>
+            <select id="cctype" name="cctype" autocomplete="cc-type" required>
+              <option value="visa">Visa</option>
+              <option value="mc">Mastercard</option>
+              <option value="amex">American Express</option>
+            </select>
+            <span class="instructions"><span class="errMessage"></span></span>
+          </p>
+          <p>
+            <label for="ccnumber">Card Number</label>
+            <input
+              type="text"
+              inputmode="text"
+              id="ccnumber"
+              name="ccnumber"
+              enterkeyhint="next"
+              autocomplete="cc-number"
+              required
+            />
+            <span class="instructions"><span class="errMessage"></span></span>
+          </p>
+
+          <p>
+            <label for="ccexp">Card Expiry</label>
+            <input
+              type="text"
+              inputmode="text"
+              id="ccexp"
+              name="ccexp"
+              enterkeyhint="next"
+              autocomplete="cc-exp"
+              required
+            />
+            <span class="instructions"><span class="errMessage"></span></span>
+          </p>
+          <p>
+            <label for="cccsc">CCV Security Code</label>
+            <input
+              type="text"
+              inputmode="text"
+              id="cccsc"
+              name="cccsc"
+              enterkeyhint="next"
+              autocomplete="cc-csc"
+              required
+            />
+            <span class="instructions"><span class="errMessage"></span></span>
+          </p>
+        </fieldset>
+        <p>
+          <button id="btnSend">Send</button>
+        </p>
+      </form>
+    </main>
+  </body>
+</html>
